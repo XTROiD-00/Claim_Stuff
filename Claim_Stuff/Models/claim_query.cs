@@ -7,7 +7,7 @@ namespace Claim_Stuff.Models
     {
 
         //connection string
-        private string connection_string = @"Server=(localdb)\poe_part2;Database=claim_stuff;";
+        private string connection = @"Server=(localdb)\poe_part2;Database=claim_stuff;Trusted_Connection=True;";
 
         //Method to create user table
         public void create_table()
@@ -17,7 +17,7 @@ namespace Claim_Stuff.Models
             {
                 //connect first, to open the port.
                 //using the using function
-                using (SqlConnection connect = new SqlConnection(connection_string))
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
                     //opening the connection
                     connect.Open();
@@ -60,7 +60,7 @@ namespace Claim_Stuff.Models
 
                 //connect first, to open the port.
                 //using the using function
-                using (SqlConnection connect = new SqlConnection(connection_string))
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
 
                     //opening the connection
@@ -103,7 +103,7 @@ namespace Claim_Stuff.Models
             try
             {
                 // Connect first, to open the port.
-                using (SqlConnection connect = new SqlConnection(connection_string))
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
                     // Opening the connection
                     connect.Open();
@@ -159,7 +159,7 @@ namespace Claim_Stuff.Models
 
             try
             {
-                using (SqlConnection connect = new SqlConnection(connection_string))
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
                     connect.Open();
 
@@ -203,7 +203,7 @@ namespace Claim_Stuff.Models
             bool updated = false;
             try
             {
-                using (SqlConnection connect = new SqlConnection(connection_string))
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
                     connect.Open();
                     string query = @"UPDATE Claims SET STATUS = @status WHERE CLAIMID = @id";
@@ -233,7 +233,7 @@ namespace Claim_Stuff.Models
             bool updated = false;
             try
             {
-                using (SqlConnection connect = new SqlConnection(connection_string))
+                using (SqlConnection connect = new SqlConnection(connection))
                 {
                     connect.Open();
                     string query = @"UPDATE Claims SET STATUS = @status WHERE CLAIMID = @id";
