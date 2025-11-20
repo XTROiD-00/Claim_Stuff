@@ -1,0 +1,31 @@
+﻿@model Claim_Stuff.Models.Login
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <label>Username</label>
+    <input type="text" asp-for="username" placeholder="Enter Username" required />
+    <span asp-validation-for="username"></span>
+
+    <label>Password</label>
+    <input type="password" asp-for="password" placeholder="Enter Password" required />
+    <span asp-validation-for="password"></span>
+
+    <label>Select Role</label><br />
+    <select asp-for="role">
+        <option>Select Role</option>
+        <option value="Lecturer">Lecturer</option>
+        <option value="PC">Program Coordinator</option>
+        <option value="PM">Program Manager</option>
+		<option value="HR">HR</option>
+
+    </select><br /><br />
+
+    <button type="submit">Login</button>
+
+    <p>Don’t have an account? <a href="/Account/Register">Register here</a></p>
+</form>
+

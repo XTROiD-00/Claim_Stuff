@@ -1,0 +1,206 @@
+﻿@model IEnumerable<Claim_Stuff.Models.Claims>
+
+@{
+    ViewData["Title"] = "My Claims";
+    string? role = ViewData["role"]?.ToString(); // Ensure role is not null
+}
+
+<h2>My Claims</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (role == "Lecturer")
+{
+    <!-- Lecturer view (as you already have this part) -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Hours</th>
+                <th>Rate</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Document</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.month</td>
+                    <td>@claim.hours</td>
+                    <td>@claim.rate</td>
+                    <td>@claim.totalAmount</td>
+                    <td>@claim.status</td>
+                    <td>@claim.documentName</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@claim.ClaimId">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Account/Lecturer" class="btn btn-secondary">Back to Dashboard</a>
+}
+else if (role == "PC")
+{
+    <!-- Program Coordinator view (as you already have this part) -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Hours</th>
+                <th>Rate</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Document</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.month</td>
+                    <td>@claim.hours</td>
+                    <td>@claim.rate</td>
+                    <td>@claim.totalAmount</td>
+                    <td>@claim.status</td>
+                    <td>@claim.documentName</td>
+                    <td>
+                        <form asp-action="PreApprove" method="post">
+                            <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                            <select name="status" required>
+                                <option value="">-- Select --</option>
+                                <option value="Pre-Approved">Pre-Approve</option>
+                                <option value="Flagged for Review">Flag for Review</option>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Account/ProgramCoordinator" class="btn btn-secondary">Back to Dashboard</a>
+}
+else if (role == "PM")
+{
+    <!-- Program Manager view (as you already have this part) -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Hours</th>
+                <th>Rate</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Document</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.month</td>
+                    <td>@claim.hours</td>
+                    <td>@claim.rate</td>
+                    <td>@claim.totalAmount</td>
+                    <td>@claim.status</td>
+                    <td>@claim.documentName</td>
+                    <td>
+                        <form asp-action="Approve" method="post">
+                            <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                            <select name="status" required>
+                                <option value="">-- Select --</option>
+                                <option value="Approved">Approve</option>
+                                <option value="Rejected">Reject</option>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <section class="report-section">
+        <h3>Generate Approved Claims Report</h3>
+        <p>Select date range or filters for the report:</p>
+        <form method="get" action="@Url.Action("Report", "HR")">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required />
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required />
+
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </form>
+    </section>
+    <a href="/Account/ProgramManager" class="btn btn-secondary">Back to Dashboard</a>
+}
+else if (role == "HR")
+{
+    <!-- HR view to manage all claims and generate reports -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Hours</th>
+                <th>Rate</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Document</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.month</td>
+                    <td>@claim.hours</td>
+                    <td>@claim.rate</td>
+                    <td>@claim.totalAmount</td>
+                    <td>@claim.status</td>
+                    <td>@claim.documentName</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@claim.ClaimId">View</a>
+                        @if (claim.status == "Pre-Approved" || claim.status == "Flagged for Review")
+                        {
+                            <form asp-action="Approve" method="post">
+                                <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                                <select name="status" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Approved">Approve</option>
+                                    <option value="Rejected">Reject</option>
+                                </select>
+                                <button type="submit">Finalize Approval</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <section class="report-section">
+        <h3>Generate Claims Report</h3>
+        <p>Select filters for the report:</p>
+        <form method="get" action="@Url.Action("GenerateReport", "HR")">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required />
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required />
+
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </form>
+    </section>
+
+    <a href="/Account/HR" class="btn btn-secondary">Back to Dashboard</a>
+}

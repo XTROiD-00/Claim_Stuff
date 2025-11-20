@@ -1,0 +1,56 @@
+﻿@model Claim_Stuff.Models.Claims
+@{
+    ViewData["Title"] = "Submit Claim";
+}
+
+<h2>Submit Monthly Claim</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <label asp-for="month"></label>
+    <input asp-for="month" class="form-control" placeholder="e.g., November" />
+    <span asp-validation-for="month" class="text-danger"></span>
+
+    <label asp-for="hours"></label>
+    <input asp-for="hours" class="form-control" type="number" placeholder="Enter total hours" />
+    <span asp-validation-for="hours" class="text-danger"></span>
+
+    <label asp-for="rate"></label>
+    <input asp-for="rate" class="form-control" step="10.00" placeholder="Enter hourly rate" />
+    <span asp-validation-for="rate" class="text-danger"></span>
+
+    <div class="form-group">
+        <label asp-for="totalAmount"></label>
+        <input asp-for="totalAmount" id="TotalAmount" class="form-control" readonly />
+    </div>
+
+    <label asp-for="DocumentFile">Upload Supporting Document</label>
+    <input asp-for="DocumentFile" type="file" accept=".pdf,.txt,.docx,.xlsx" placeholder="e.g.timesheet.pdf" />
+    <span asp-validation-for="DocumentFile" class="text-danger"></span>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-secondary">Cancel</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function calculateTotal() {
+            let hours = parseFloat(document.getElementById("Hours").value) || 0;
+            let rate = parseFloat(document.getElementById("Rate").value) || 0;
+
+            let total = hours * rate;
+
+            document.getElementById("TotalAmount").value = total.toFixed(2);
+        }
+
+        document.getElementById("Hours").addEventListener("input", calculateTotal);
+        document.getElementById("Rate").addEventListener("input", calculateTotal);
+
+
+    </script>
+
+}

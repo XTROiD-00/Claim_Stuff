@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Program Manager Dashboard";
+}
+
+<h2>Program Manager Dashboard</h2>
+
+<a href="/Claims/MyClaims"><button>Approve Claims</button></a>
+<a href="/Account/Logout"><button>Logout</button></a>
+
+<section class="manager-home">
+
+    <!-- Welcome Card -->
+    <div class="card welcome-card">
+        <h1 class="manager-title">Welcome 🎓</h1>
+        <p class="manager-intro">
+            This platform streamlines the process of submitting and managing monthly claims.
+            Lecturers submit claims, Program Coordinators verify them, and as a Project Manager,
+            you have the final responsibility to approve or reject claims.
+            Built-in validation ensures the process is reliable, accurate, and well-documented.
+        </p>
+    </div>
+
+    <!-- Approval Workflow Card -->
+    <div class="card workflow-card">
+        <h2 class="workflow-title">Manager Approval Workflow</h2>
+        <div class="workflow-steps">
+            <div class="step">
+                <div class="step-icon">📥</div>
+                <div class="step-text">
+                    <h3>Receive Verified Claims</h3>
+                    <p>Review claims after verification by the Program Coordinator.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">🧐</div>
+                <div class="step-text">
+                    <h3>Evaluate Claims</h3>
+                    <p>Check supporting documents, compliance, and completeness.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">✅</div>
+                <div class="step-text">
+                    <h3>Approve or Reject</h3>
+                    <p>Make the final decision and update the claim status for the Lecturer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

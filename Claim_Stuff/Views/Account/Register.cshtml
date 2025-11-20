@@ -1,0 +1,39 @@
+﻿@model Claim_Stuff.Models.Register
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
+
+    <label>Name</label>
+    <input type="text" asp-for="name" placeholder="Enter Name" required />
+    <span asp-validation-for="name"></span>
+
+    <label>Email</label>
+    <input type="email" asp-for="email" placeholder="Enter Email" required />
+    <span asp-validation-for="email"></span>
+
+    <label>Username</label>
+    <input type="text" asp-for="username" placeholder="Enter Username" required/>
+    <span asp-validation-for="username"></span>
+
+    <label>Password</label>
+    <input type="password" asp-for="password" placeholder="Enter Password" required/>
+    <span asp-validation-for="password"></span>
+
+    <label>Select Role</label>
+    <select asp-for="role" required>
+        <option>Select Role</option>
+        <option value="Lecturer">Lecturer</option>
+        <option value="PC">Program Coordinator</option>
+        <option value="PM">Program Manager</option>
+		<option value="HR">HR</option>
+    </select>
+
+    <button type="submit">Register</button>
+</form>
+
+

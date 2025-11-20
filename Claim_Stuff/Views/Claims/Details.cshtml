@@ -1,0 +1,17 @@
+﻿@model Claim_Stuff.Models.Claims
+@{
+    ViewData["Title"] = "Claim Details";
+}
+
+<h2>Claim Details</h2>
+
+<p><strong>Month:</strong> @Model.month</p>
+<p><strong>Hours Worked:</strong> @Model.hours</p>
+<p><strong>Hourly Rate:</strong> @Model.rate</p>
+<p><strong>Total Amount:</strong> @Model.totalAmount</p>
+<p><strong>Status:</strong> @Model.status</p>
+<p><strong>Document:</strong> @Model.documentName</p>
+
+<br />
+<a href="/Claims/MyClaims" class="btn btn-secondary">Back to My Claims</a>
+

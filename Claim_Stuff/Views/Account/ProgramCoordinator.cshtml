@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Program Coordinator Dashboard";
+}
+
+<h2>Program Coordinator Dashboard</h2>
+
+<a href="/Claims/MyClaims"><button>Review Claims</button></a>
+<a href="/Account/Logout"><button>Logout</button></a>
+
+<section class="coordinator-home">
+
+    <!-- Welcome Card -->
+    <div class="card welcome-card">
+        <h1 class="coordinator-title">Welcome 🎓</h1>
+        <p class="coordinator-intro">
+            This platform streamlines the process of submitting and managing monthly claims.
+            Lecturers submit claims, and as a Program Coordinator, you verify documents, ensure forms are complete,
+            and confirm compliance before forwarding claims to the Program Manager.
+            Built-in validation and mandatory fields make your workflow efficient and reliable.
+        </p>
+    </div>
+
+    <!-- Verification Workflow Card -->
+    <div class="card workflow-card">
+        <h2 class="workflow-title">Coordinator Workflow Overview</h2>
+        <div class="workflow-steps">
+            <div class="step">
+                <div class="step-icon">📝</div>
+                <div class="step-text">
+                    <h3>Receive Claims</h3>
+                    <p>Review submitted claims from lecturers for completeness and accuracy.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">🔍</div>
+                <div class="step-text">
+                    <h3>Verify Documents</h3>
+                    <p>Ensure all supporting files and mandatory fields are properly completed.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">➡️</div>
+                <div class="step-text">
+                    <h3>Forward to Manager</h3>
+                    <p>After verification, forward claims to the Program Manager for final approval.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

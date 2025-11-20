@@ -1,0 +1,38 @@
+﻿@model List<Claim_Stuff.Models.Claims>
+
+@{
+    ViewData["Title"] = "Approved Claims";
+}
+
+<h2>Approved Claims</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Faculty</th>
+            <th>Module</th>
+            <th>Hours</th>
+            <th>Rate</th>
+            <th>Total</th>
+            <th>Submission Date</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.ClaimId</td>
+            
+                <td>@c.hours</td>
+                <td>@c.rate</td>
+                <td>@c.totalAmount</td>
+     
+                <td>@c.status</td>
+            </tr>
+        }
+    </tbody>
+</table>
