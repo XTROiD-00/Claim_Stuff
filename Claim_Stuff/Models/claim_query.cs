@@ -14,8 +14,8 @@ namespace Claim_Stuff.Models
             {
                 connect.Open();
                 string query = @"
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Claims' AND xtype='U')
-CREATE TABLE Claims(
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Claim' AND xtype='U')
+CREATE TABLE Claim(
     CLAIMID INT IDENTITY(1,1) PRIMARY KEY,
     MONTH VARCHAR(30),
     HOURS INT,
@@ -35,7 +35,7 @@ CREATE TABLE Claims(
             using (SqlConnection connect = new SqlConnection(connection))
             {
                 connect.Open();
-                string query = @"INSERT INTO Claims 
+                string query = @"INSERT INTO Claim 
 (MONTH, HOURS, RATE, TOTALAMOUNT, DOCUMENTNAME, STATUS)
 VALUES (@month,@hours,@rate,@total,@doc,@status)";
 
@@ -58,7 +58,7 @@ VALUES (@month,@hours,@rate,@total,@doc,@status)";
             using (SqlConnection connect = new SqlConnection(connection))
             {
                 connect.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Claims", connect);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Claim", connect);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {

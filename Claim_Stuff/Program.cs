@@ -1,9 +1,15 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Claim_Stuff.Models;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// ✅ ADD SESSION SERVICES HERE
+builder.Services.AddScoped<claim_query>();
+
+
+// ✅ REQUIRED for Session
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -11,10 +17,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// ✅ THIS FIXES YOUR CRASH
+builder.Services.AddScoped<claim_query>();
+
 var app = builder.Build();
 
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -26,9 +33,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// ✅ ADD THIS LINE RIGHT HERE (VERY IMPORTANT)
 app.UseSession();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

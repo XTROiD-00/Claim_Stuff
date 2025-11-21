@@ -17,11 +17,12 @@ namespace Claim_Stuff.Controllers
         }
 
         [HttpGet]
+        [HttpGet]
         public IActionResult Create()
         {
-            _query.create_table();
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Create(Claims claim)
